@@ -9,6 +9,8 @@
   --white-background: rgba(255, 255, 255, 1);
   --hero-background: rgba(46, 47, 66, 0.7);
   --success: rgba(49, 208, 170, 1);
+  --modal-background: rgba(252, 252, 252, 1);
+  --modal-overlay: rgba(46, 47, 66, 0.4);
 }
 
 body {
@@ -148,13 +150,18 @@ img {
   color: var(--text);
 }
 
-.navigation:active {
-  color: var(--pressed-state);
-  border-bottom: solid 4px var(--pressed-state);
+.navigation:after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 4px;
+  background-color: var(--pressed-state);
+  border-radius: 2px;
+  opacity: 0;
 }
 
-.contact:active {
-  color: var(--pressed-state);
+.navigation:visited::after {
+  opacity: 1;
 }
 
 .navigation:hover,
@@ -518,3 +525,41 @@ img {
 .social-footer-icon {
   fill: var(--light);
 }
+
+/* Modal window style */
+.modal {
+  display: flex;
+  background-color: var(--modal-overlay);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.modal-window {
+  width: 408px;
+  height: 576px;
+  background-color: var(--modal-background);
+  margin: auto;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.modal-window-btn {
+  width: 24px;
+  height: 24px;
+  background-color: var(--accent);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.is-hidden {
+  visibility: hidden;
+  opacity: initial;
+  pointer-events: all;
+}
+
+/* Active page border */
