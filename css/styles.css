@@ -37,6 +37,13 @@ p {
   padding: 0;
 }
 
+*:hover,
+*:focus {
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -123,6 +130,10 @@ img {
   color: var(--dark);
 }
 
+.menu-item {
+  position: relative;
+}
+
 .navigation {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
@@ -132,6 +143,7 @@ img {
   letter-spacing: 0.02em;
   color: var(--dark);
   display: block;
+
   padding: 24px 0;
 }
 
@@ -150,18 +162,15 @@ img {
   color: var(--text);
 }
 
-.navigation:after {
+.current::after {
   display: block;
   content: '';
   width: 100%;
   height: 4px;
   background-color: var(--pressed-state);
   border-radius: 2px;
-  opacity: 0;
-}
-
-.navigation:visited::after {
-  opacity: 1;
+  bottom: 0px;
+  position: absolute;
 }
 
 .navigation:hover,
@@ -545,6 +554,7 @@ img {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+  position: relative;
 }
 
 .modal-window-btn {
@@ -554,12 +564,59 @@ img {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   cursor: pointer;
+  position: absolute;
+  top: 24px;
+  left: 360px;
 }
 
 .is-hidden {
   visibility: hidden;
   opacity: initial;
-  pointer-events: all;
+  pointer-events: none;
+}
+
+/* Modal animation */
+.modal {
+  perspective: 1300px;
+}
+
+.modal.is-hidden .modal-window {
+  transform-style: preserve-3d;
+  transform: translateZ(600px) rotateX(20deg);
+  opacity: 0;
+}
+
+.modal .modal-window {
+  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+  transform: translateZ(0px) rotateX(0deg);
+  opacity: 1;
 }
 
 /* Active page border */
+
+/* Portfolio overlay */
+.project-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-overlay {
+  background-color: var(--brand-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  padding: 40px 32px;
+
+  transform: translatey(100%);
+  transition: transform 500ms ease-in-out;
+}
+
+.project-active:hover .project-overlay {
+  transform: translatex(0);
+}
+
+.project-overlay-text {
+  color: var(--light);
+}
